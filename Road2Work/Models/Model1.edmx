@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_Road2WorkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="T_information">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adresse" Type="varchar" MaxLength="50" />
+          <Property Name="code_postal" Type="varchar" MaxLength="50" />
+          <Property Name="ville" Type="varchar" MaxLength="50" />
+          <Property Name="mail" Type="varchar" MaxLength="50" />
+          <Property Name="nom" Type="varchar" MaxLength="50" />
+          <Property Name="prenom" Type="varchar" MaxLength="50" />
+          <Property Name="score" Type="varchar" MaxLength="50" />
+          <Property Name="nombre_place" Type="varchar" MaxLength="50" />
+          <Property Name="id_site" Type="int" />
+        </EntityType>
+        <EntityType Name="T_site">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adresse" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="code_postal" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ville" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_user">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mdp" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Est_admin" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="db_Road2WorkModelStoreContainer">
+          <EntitySet Name="T_information" EntityType="Self.T_information" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_site" EntityType="Self.T_site" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_user" EntityType="Self.T_user" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_Road2WorkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="T_information">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adresse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="code_postal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ville" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="score" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_place" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_site" Type="Int32" />
+          <NavigationProperty Name="T_site" Relationship="db_Road2WorkModel.T_siteT_information" FromRole="T_information" ToRole="T_site" />
+          <NavigationProperty Name="T_user" Relationship="db_Road2WorkModel.T_userT_information" FromRole="T_information" ToRole="T_user" />
+        </EntityType>
+        <EntityType Name="T_site">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adresse" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="code_postal" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ville" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="T_information" Relationship="db_Road2WorkModel.T_siteT_information" FromRole="T_site" ToRole="T_information" />
+        </EntityType>
+        <EntityType Name="T_user">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mdp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Est_admin" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="T_information" Relationship="db_Road2WorkModel.T_userT_information" FromRole="T_user" ToRole="T_information" />
+        </EntityType>
+        <EntityContainer Name="db_Road2WorkEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="T_information" EntityType="Self.T_information" />
+          <EntitySet Name="T_site" EntityType="Self.T_site" />
+          <EntitySet Name="T_user" EntityType="Self.T_user" />
+          <AssociationSet Name="T_siteT_information" Association="db_Road2WorkModel.T_siteT_information">
+            <End Role="T_site" EntitySet="T_site" />
+            <End Role="T_information" EntitySet="T_information" />
+          </AssociationSet>
+          <AssociationSet Name="T_userT_information" Association="db_Road2WorkModel.T_userT_information">
+            <End Role="T_user" EntitySet="T_user" />
+            <End Role="T_information" EntitySet="T_information" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="T_siteT_information">
+          <End Type="db_Road2WorkModel.T_site" Role="T_site" Multiplicity="*" />
+          <End Type="db_Road2WorkModel.T_information" Role="T_information" Multiplicity="1" />
+        </Association>
+        <Association Name="T_userT_information">
+          <End Type="db_Road2WorkModel.T_user" Role="T_user" Multiplicity="1" />
+          <End Type="db_Road2WorkModel.T_information" Role="T_information" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_Road2WorkModelStoreContainer" CdmEntityContainer="db_Road2WorkEntities2">
+          <EntitySetMapping Name="T_information">
+            <EntityTypeMapping TypeName="db_Road2WorkModel.T_information">
+              <MappingFragment StoreEntitySet="T_information">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="adresse" ColumnName="adresse" />
+                <ScalarProperty Name="code_postal" ColumnName="code_postal" />
+                <ScalarProperty Name="ville" ColumnName="ville" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="score" ColumnName="score" />
+                <ScalarProperty Name="nombre_place" ColumnName="nombre_place" />
+                <ScalarProperty Name="id_site" ColumnName="id_site" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_site">
+            <EntityTypeMapping TypeName="db_Road2WorkModel.T_site">
+              <MappingFragment StoreEntitySet="T_site">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="adresse" ColumnName="adresse" />
+                <ScalarProperty Name="code_postal" ColumnName="code_postal" />
+                <ScalarProperty Name="ville" ColumnName="ville" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_user">
+            <EntityTypeMapping TypeName="db_Road2WorkModel.T_user">
+              <MappingFragment StoreEntitySet="T_user">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Mdp" ColumnName="Mdp" />
+                <ScalarProperty Name="Est_admin" ColumnName="Est_admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
